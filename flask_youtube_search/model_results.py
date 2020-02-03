@@ -9,7 +9,7 @@ import os
 #import xml.etree.ElementTree as ET
 import random
 from youtube_transcript_api import YouTubeTranscriptApi
-from flask_youtube_search import parsing_hsk_v3
+from flask_youtube_search import parsing_hsk_v3, find_ingre_dict
 
 
 
@@ -83,8 +83,19 @@ def hsk_result(video_id):
     #new_ingredient_list = []
     #for y in ingredient_list:
     #    ingredient_list.append(y+'<br>') 
-
-    return ingredient_list
+    filtered_list = []
+    add_list = 0
+    for items in ingredient_list:
+        for i in items:
+            ingr_bool = find_ingre_dict(i)
+            if ingr_bool == True:
+                add_list = 1
+            else:
+                add_list = 0
+        if add_list == 1 :
+            filtered_list.append(items)
+                
+    return filtered_list
 
     #print(list(set(ingredient_list)))
 
