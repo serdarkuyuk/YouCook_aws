@@ -1,4 +1,5 @@
 from nltk.corpus import wordnet
+from nltk.tokenize import word_tokenize
 #import wordlists
 
 #LEMMATIZER = WordNetLemmatizer()
@@ -33,6 +34,27 @@ def is_it_ingredient(word):
                 return True
     #return word #in wordlists.ingredients
 
+'''    
+ingredient_list=["blackberries milk", "chopped potatos"]
+filtered_list = []
+add_list = 0
+for items in ingredient_list:
+    print(items)
+    for i in word_tokenize(items):
+        ingr_bool = is_it_ingredient(i)
+        print(i, ingr_bool) 
+        if ingr_bool == True:
+            add_list = 1
+        else:
+            add_list = 0
+    if add_list == 1 :
+        filtered_list.append(items)
+        add_list = 0
+          
+
+
+print(is_it_ingredient('blackberries'))
+'''
 #filtered_ingred = []
 #for i in extracted_ingred:
 #    if is_it_ingredient(i) == True:
