@@ -10,6 +10,8 @@ import os
 import random
 from youtube_transcript_api import YouTubeTranscriptApi
 from flask_youtube_search import parsing_hsk_v3, find_ingre_dict
+from nltk.tokenize import word_tokenize
+import pandas as pd
 
 
 
@@ -66,7 +68,8 @@ def hsk_result(video_id):
     test_sentences = get_captions(video_id) # extract the sentences from [sentence, entity]
     #result2 = get_description(video_id) # extract the sentences from [sentence, entity]
 
-    ner = load_model("/home/ubuntu/application/YouCook_aws/flask_youtube_search/models")
+    #ner = load_model("/home/ubuntu/application/YouCook_aws/flask_youtube_search/models")
+    ner = load_model("/Users/serdarkuyuk/Documents/harvard/serdar/insight/youtube/flaskyoucook/YouCook_aws/flask_youtube_search/models")
 
     
     #print(''.join(test_sentences))
@@ -79,21 +82,29 @@ def hsk_result(video_id):
     for x in doc.ents:
         ingredient_list.append(x.text) # +'<br>'
 
-    ingredient_list = list(set(ingredient_list))
+    ingredient_series = pd.Series(ingredient_list)
+    ingredient_series.drop_duplicates(inplace=True)
+    print(ingredient_series)
+
+    ingredient_list = ingredient_series #list(set(ingredient_list))
     #new_ingredient_list = []
     #for y in ingredient_list:
     #    ingredient_list.append(y+'<br>') 
     filtered_list = []
     add_list = 0
     for items in ingredient_list:
-        for i in items:
+        for i in word_tokenize(items):
             ingr_bool = find_ingre_dict.is_it_ingredient(i)
+            #print(i, ingr_bool) 
             if ingr_bool == True:
                 add_list = 1
             else:
                 add_list = 0
         if add_list == 1 :
-            filtered_list.append(items)
+            filtered_list.append(items.capitalize())
+            add_list = 0
+          
+
                 
     return filtered_list
 
