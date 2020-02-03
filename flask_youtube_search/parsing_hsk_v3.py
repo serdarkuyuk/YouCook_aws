@@ -5,9 +5,12 @@ from nltk import ne_chunk, pos_tag
 import re
 
 
+
 def hsk(descri):
-
-
+	
+	#nltk.download('words')
+	#nltk.download('punkt')
+	#nltk.download('maxent_ne_chunker')
 	descri = re.sub(r'^https?:\/\/.*[\r\n]*', '', descri, flags=re.MULTILINE)
 	descri = re.sub(r'http\S+', '', descri)
 	descri = re.sub(r'www\S+', '', descri)
@@ -50,7 +53,7 @@ def hsk(descri):
 #grammar = "NP: {<DT>?<JJ.*>*<NN.*>+}" 
 #grammar = "NP: {<DT>?<JJ>*<NN>}" 
 	for s in descri.splitlines():
-		if s is not '\n':
+		if s != '\n':
 			'''
 			s2 = entities(s) 
 			#print(s2.leaves())

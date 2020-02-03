@@ -66,7 +66,7 @@ def hsk_result(video_id):
     test_sentences = get_captions(video_id) # extract the sentences from [sentence, entity]
     #result2 = get_description(video_id) # extract the sentences from [sentence, entity]
 
-    ner = load_model("/Users/serdarkuyuk/Documents/harvard/serdar/insight/youtube/flaskyoucook/youCOOK_v2/flask_youtube_search/models")
+    ner = load_model("/home/ubuntu/application/YouCook_aws/flask_youtube_search/models")
 
     
     #print(''.join(test_sentences))
