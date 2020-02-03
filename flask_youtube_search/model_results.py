@@ -87,7 +87,7 @@ def hsk_result(video_id):
     add_list = 0
     for items in ingredient_list:
         for i in items:
-            ingr_bool = find_ingre_dict(i)
+            ingr_bool = find_ingre_dict.is_it_ingredient(i)
             if ingr_bool == True:
                 add_list = 1
             else:
