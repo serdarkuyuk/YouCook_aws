@@ -78,15 +78,18 @@
           </div>
         </div>
         <div class="col-md-4"> 
-	      <ol>
+	      <ul>
 	      {% for item in video.description %}
         <li> {{ item }} </li>
 	      {% endfor %}
-	      </ol>
+	      </ul>
         </div>
         <div class="col-md-4"> 
-
-        {{ video.description2 }}
+	<ul>
+	{% for item in video.description2 %}
+	<li> {{ item }} </li>
+	{% endfor %}  	
+        </ul>
 
         </div>
         <div class="h-divider"></div>

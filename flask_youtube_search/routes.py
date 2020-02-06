@@ -58,15 +58,16 @@ def index():
                 #'language' : result['snippet'][language
             }
             #ruledbase_parsed_text = parsing_hsk_v3.hsk(video_data['description'])
-            
             #print(type(result["id"]))
 
             results1= model_results.hsk_result(str(result["id"]))
-
-            video_data['description'] = results1 #''.join(results)
-            #video_data['description2'] = ruledbase_parsed_text
+            if len(results1) > 15:
+                video_data['description'] = results1[:15] #''.join(results)
+                video_data['description2'] = results1[15:31]
+            else:
+                video_data['description'] = results1[:15]
+                video_data['description2'] = []
             videos.append(video_data)
-        
     return render_template('index.html', videos=videos)
 
 

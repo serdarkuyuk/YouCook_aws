@@ -14,13 +14,10 @@ def hsk(descri):
 	descri = re.sub(r'^https?:\/\/.*[\r\n]*', '', descri, flags=re.MULTILINE)
 	descri = re.sub(r'http\S+', '', descri)
 	descri = re.sub(r'www\S+', '', descri)
-<<<<<<< HEAD
 	descri = re.sub("((\S+)?(http(s)?)(\S+))|((\S+)?(www)(\S+))|((\S+)?(\@)(\S+)?)", '', descri)
 	#descri = re.sub("[^a-zA-Z0-9]", '', descri)
-=======
 	#descri = re.sub("((\S+)?(http(s)?)(\S+))|((\S+)?(www)(\S+))|((\S+)?(\@)(\S+)?)", '', descri)
 	#descri = re.sub("[^a-zA-Z ]", '', descri)
->>>>>>> e2a96cbf1e5b2726b2469e26e79fdf3f27417876
 	descri = descri.lower() # lower case the text
 	descri = re.sub(r'^\W', '', descri)
 	
