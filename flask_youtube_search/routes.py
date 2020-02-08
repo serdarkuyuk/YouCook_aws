@@ -3,7 +3,6 @@ import requests
 from isodate import parse_duration
 
 from flask import Blueprint, render_template, current_app, request, redirect
-from flask_youtube_search import parsing_hsk_v3
 from flask_youtube_search import model_results
 
 main = Blueprint('main', __name__)

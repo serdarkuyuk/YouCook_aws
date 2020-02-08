@@ -2,9 +2,8 @@ from __future__ import unicode_literals
 import spacy
 import os 
 from youtube_transcript_api import YouTubeTranscriptApi
-from flask_youtube_search import find_ingre_dict
 from nltk.tokenize import word_tokenize
-from nltk.corpus import wordnet
+from nltk.corpus import wordnet, stopwords
 
 
 def extract_ingredients(video_id):
@@ -68,12 +67,19 @@ def extract_ingredients(video_id):
         """
         Filters out the non-ingredient text from ingredient_list
         """
+        stop_words = set(stopwords.words('english'))
+        
         filtered_list = []
         add_list = 0  #a dummy variable to add a text to filtered list
         for phrases in set(ingredient_list): #run through only one item in set (removes duplicates)
-            
+
+            for word in phrases:
+                if word in stop_words:
+                    phrases.replace(word,'')
+
             #if one of the word in a phrase is ingredient, counts in to list
             for word in word_tokenize(phrases):  #phrases can be phrase (run through phrases)
+                
                 is_ingredient = is_it_ingredient(word) #returns true if a word is ingridient
                 
                 if is_ingredient == True:
@@ -83,7 +89,6 @@ def extract_ingredients(video_id):
 
             ##if one of the word in a phrase is ingredient, counts in to list
             if add_list == 1 :
-
 
                 filtered_list.append(phrases.capitalize())
                 add_list = 0 
