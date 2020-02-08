@@ -1,9 +1,41 @@
 from __future__ import absolute_import
 import requests
 from isodate import parse_duration
+import random
 
 from flask import Blueprint, render_template, current_app, request, redirect
 from flask_youtube_search import model_results
+from yelpapi import YelpAPI
+#from flask_youtube_search import yelp_crediatials
+
+
+class YelpAnalyzer():
+    """
+    Class holds the search results from yelp for spesific query
+    """
+
+    def __init__(self):
+        self.client_id = current_app.config['YELP_CLIENT_ID']
+        self.api_key =  current_app.config['YELP_API_KEY']
+#yelp_crediatials.api_key
+#yelp_crediatials.client_id 
+    def search_yelp(self, youcook_search_query):
+        yelp_api = YelpAPI(self.api_key)
+        term = youcook_search_query
+        location = 'Boston'
+        search_limit = 5
+        response = yelp_api.search_query(term = term,
+                                         location = location,
+                                         limit = search_limit,
+                                         sort_by="rating",
+                                         open_now = True,
+                                         price="1"
+                                         )
+        #randomly select of the restaurants for diversity
+        random_int = random.randint(0, search_limit-1)
+        rand_response = response["businesses"][random_int]
+
+        return rand_response["url"] #return url of the restaurant
 
 main = Blueprint('main', __name__)
 
@@ -13,7 +45,7 @@ def index():
     video_url = 'https://www.googleapis.com/youtube/v3/videos'
 
     videos = []
-
+    
     if request.method == 'POST':
 
         #define search parameters
@@ -26,6 +58,7 @@ def index():
             'videoCaption' : 'closedCaption'
         }
 
+
         #get search results
         r = requests.get(search_url, params=search_params)
 
@@ -37,9 +70,14 @@ def index():
         for result in results:
             video_ids.append(result['id']['videoId'])
 
-        #if "I am hungry" button submitted, first video will be directed 
+
+        yelp = YelpAnalyzer()
+
+        #if "I am hungry" button submitted, first yelp advise will be directed 
         if request.form.get('submit') == 'lucky':
-            return redirect(f'https://www.youtube.com/watch?v={ video_ids[0] }')
+            youcook_search_query = request.form.get('query') #gets the user query
+            yelp_url = yelp.search_yelp(youcook_search_query)   #search at yelp
+            return redirect(yelp_url)  
         
         #define video search parameters   
         video_params = {
@@ -73,6 +111,9 @@ def index():
                 #if number of ingredients 15, show in the other colomn
                 video_data['ingredients_p1'] = list_ingredients[:15]   
                 video_data['ingredients_p2'] = list_ingredients[15:31]
+            elif len(list_ingredients) == 0: 
+                video_data['ingredients_p1'] = ["No English Captions"]
+                video_data['ingredients_p2'] = ["Advise: You can still make it by watching video!!!"]
             else:
                 video_data['ingredients_p1'] = list_ingredients[:15]
                 video_data['ingredients_p2'] = []

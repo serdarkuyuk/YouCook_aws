@@ -37,13 +37,18 @@ def extract_ingredients(video_id):
         """
         retrieve the available transcripts
         """
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        
-        #parse only string and remove the time of captions
-        text = []
-        for txt in transcript:
-           text.append(txt['text'])
-        return text
+        try:
+            transcript = YouTubeTranscriptApi.get_transcript(video_id)
+            
+            #parse only string and remove the time of captions
+            text = []
+            for txt in transcript:
+               text.append(txt['text'])
+            return text
+        except:
+            text = "No Captions"
+            return text
+
 
     def is_it_ingredient(word):
         """
