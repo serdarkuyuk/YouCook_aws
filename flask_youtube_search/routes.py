@@ -60,7 +60,7 @@ def index():
             #ruledbase_parsed_text = parsing_hsk_v3.hsk(video_data['description'])
             #print(type(result["id"]))
 
-            results1= model_results.hsk_result(str(result["id"]))
+            results1= model_results.extract_ingredients(str(result["id"]))
             if len(results1) > 15:
                 video_data['description'] = results1[:15] #''.join(results)
                 video_data['description2'] = results1[15:31]
