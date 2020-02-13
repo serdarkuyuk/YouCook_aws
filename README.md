@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # YouCOOK project
 
 A custom Name Entity Recognition algorithm using Natural Language Processing at Insight Data Science.
@@ -63,4 +62,3 @@ This project is finished when I was a fellow at Insight Data Science.
   -Here, I build a web site, that search YouTube videos and gives ingredients next to each video.
 
 I build a custom Name Entity Recognition model using spaCy Natural Language Process. Web-site is accesible at youcook.xyz:5000 and is running in Amozon Web Services. I used Flask framework with my project.
->>>>>>> f38a9659fa3c6d0ecfee6306ff778476e0640e2f
