@@ -1,5 +1,5 @@
 #import os 
 
-YOUTUBE_API_KEY = 'AIzaSyDgIBAZvgiEqViBxhhDaXO04OCZu7r-TMI'
-YELP_CLIENT_ID  = '3OJArZ-k3p-XKON4L2vB1A'
-YELP_API_KEY = '7_ma0TpmrvOdzwezoWoEzi9-1T6JMZ60cDIyCJRQ7G4jitdqJSciZKqiN_L_ZebrrzJhiHXRZVKG4_csfR1dceLJ9VRjd_QweVviZwRMqaLRP3uLCqYR2QNRjp0WXnYx'
+YOUTUBE_API_KEY = 'enterkey'
+YELP_CLIENT_ID  = 'enterkey'
+YELP_API_KEY = 'enterkey'
