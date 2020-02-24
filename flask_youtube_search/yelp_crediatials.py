@@ -1,2 +1,2 @@
-client_id = '3OJArZ-k3p-XKON4L2vB1A'
-api_key = '7_ma0TpmrvOdzwezoWoEzi9-1T6JMZ60cDIyCJRQ7G4jitdqJSciZKqiN_L_ZebrrzJhiHXRZVKG4_csfR1dceLJ9VRjd_QweVviZwRMqaLRP3uLCqYR2QNRjp0WXnYx'
+client_id = 'enterkey'
+api_key = 'enterkey'
